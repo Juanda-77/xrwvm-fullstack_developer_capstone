@@ -49,8 +49,8 @@ def logout_request(request):  # Terminate user session
 
 @csrf_exempt
 def registration(request):
-# context = {}
-# Load JSON data from the request body
+    # context = {}
+    # Load JSON data from the request body
     data = json.loads(request.body)
     username = data['userName']
     password = data['password']
@@ -102,8 +102,8 @@ def get_cars(request):
 # particular state if state is passed
 
 
-def get_dealerships(request, state= "All"):
-    if(state == "All"):
+def get_dealerships(request, state="All"):
+    if state == "All":
         endpoint = "/fetchDealers"
     else:
         endpoint = "/fetchDealers/"+state
@@ -135,10 +135,10 @@ def get_dealer_details(request, dealer_id):
 
 
 def add_review(request):
-    if request.user.is_anonymous == False:
+    if not request.user.is_anonymous:
         data = json.loads(request.body)
         try:
-            response = post_review(data)
+            # response = post_review(data)
             return JsonResponse({"status": 200})
         except Exception:
             return JsonResponse({
